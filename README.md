@@ -8,6 +8,6 @@ Places are licensed under CDLA Permissive v 2.0, see https://cdla.dev/permissive
 
 Run:
 
-```docker run -it -v `pwd`:/opt/workspace apache/sedona:latest python3 download.py```
+```docker run --rm -it -v `pwd`:/opt/workspace apache/sedona:latest python3 download.py```
 
 to download to POIs for NZ, and export to CSV format in the current working directory

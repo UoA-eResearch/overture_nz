@@ -1,4 +1,4 @@
-# Run with docker run -it -v `pwd`:/opt/workspace apache/sedona:latest python3 download.py
+# Run with docker run --rm -it -v `pwd`:/opt/workspace apache/sedona:latest python3 download.py
 
 import time
 from sedona.spark import *
