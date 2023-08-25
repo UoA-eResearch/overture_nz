@@ -99,6 +99,16 @@
             skipEmptyLines: true,
             complete: function (results) {
                 console.log(results)
+                var seen_lls = {}
+                for (var d of results.data) {
+                    var ll = `${d.lat}_${d.lng}`
+                    while (seen_lls[ll]) {
+                        console.warn(`${d.name} is colocated - shifting lng`)
+                        d.lng += 0.00002 // ~1.75m
+                        ll = `${d.lat}_${d.lng}`
+                    }
+                    seen_lls[ll] = 1
+                }
                 layers.push(new deck.ScatterplotLayer({
                     id: 'layer',
                     data: results.data,
