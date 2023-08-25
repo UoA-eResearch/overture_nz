@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <title>Overture NZ POIs</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="https://unpkg.com/deck.gl@^8.2.0/dist.min.js"></script>
+    <script src="https://unpkg.com/@deck.gl/carto@^8.2.0/dist.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.js"
+        integrity="sha512-lO8f7sIViqr9x5VE6Q72PS6f4FoZcuh5W9YzeSyfNRJ9z/qL3bkweiwG6keGzWS0BQzNDqAWXdBhYzFD6KffIw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"
+        integrity="sha512-zInFF17qBFVvvvFpIfeBzo7Tj7+rQxLeTJDmbxjBz5/zIr89YVbTNelNhdTT+/DCrxoVzBeUPVFJsczKbB7sew=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #title {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 1000;
+            width: 50%;
+            text-align: center;
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 2px 2px #000000;
+            font-weight: normal;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">Overture NZ POIs</h1>
+    <script>
+        var map = new deck.DeckGL({
+            mapStyle: deck.carto.BASEMAP.DARK_MATTER,
+            initialViewState: {
+                longitude: 174.7284,
+                latitude: -36.9443,
+                zoom: 9,
+                pitch: 0
+            },
+            controller: true,
+            getTooltip: ({ object }) => object && {
+                html: buildDescString(object),
+                style: {
+                    "background-color": "white",
+                    "color": "black"
+                }
+            },
+            getCursor: () => "inherit",
+        });
+
+        function buildDescString(o) {
+            return  `<b>${o.name}</b><br>
+                        Main category: ${o.main_category}<br>
+                        Alternate categories: ${o.alternate_categories}
+            `;
+        }
+
+        function stringToColour(str) {
+            if (!str) return [127, 127, 127]
+            let hash = 0;
+            str.split('').forEach(char => {
+                hash = char.charCodeAt(0) + ((hash << 5) - hash)
+            })
+            let colour = []
+            for (let i = 0; i < 3; i++) {
+                const value = (hash >> (i * 8)) & 0xff
+                colour.push(value)
+            }
+            return colour
+        }
+
+        var layers = []
+        Papa.parse("overture_nz.csv", {
+            download: true,
+            dynamicTyping: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function (results) {
+                console.log(results)
+                layers.push(new deck.ScatterplotLayer({
+                    id: 'layer',
+                    data: results.data,
+                    wrapLongitude: true,
+                    filled: true,
+                    getPosition: d => [d.lng, d.lat],
+                    pickable: true,
+                    getFillColor: d => stringToColour(d.main_category),
+                    //pointRadiusUnits: "pixels",
+                    radiusMinPixels: 1,
+                    getRadius: 2,
+                }))
+                map.setProps({ layers: [...layers] });
+            }
+        })
+    </script>
+</body>
+
+</html>
