@@ -12,7 +12,7 @@ Places are licensed under CDLA Permissive v 2.0, see https://cdla.dev/permissive
 
 Run:
 
-`overturemaps download --bbox 163.08,-50.12,180,-31.31 -f geojson -o overture_NZ.geojson -t place`  
-`python geojson2csv.py`
+`overturemaps download --bbox 163.08,-50.12,180,-31.31 -f geoparquet -o overture_NZ.geoparquet -t place`  
+`python geoparquet2csv.py`
 
 to download to POIs for NZ, and export to CSV format in the current working directory
