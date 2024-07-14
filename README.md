@@ -6,7 +6,7 @@ Places are licensed under CDLA Permissive v 2.0, see https://cdla.dev/permissive
 
 ## Installation
 
-`pip install geopandas`
+`pip install geopandas overturemaps`
 
 ### Downloading
 
