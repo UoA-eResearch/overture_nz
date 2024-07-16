@@ -1,0 +1,47 @@
+Overture category -> Overall category
+park -> Parks
+sports_club_and_league,sports_and_recreation_venue -> Sports Clubrooms (or sports facilities)
+Blue spaces
+library -> Libraries
+art_gallery,arts_and_crafts -> Arts & Crafts
+bus_station,train_station -> Bus/train/ferry stops
+Free public wifi zones
+supermarket -> Supermarkets
+convenience_store -> Dairies
+fruits_and_vegetables -> Fruit & Veg
+Foodbanks
+gas_station -> Service Stations
+banks,atms,mortgage_lender -> Banks, ATM & money lenders
+laundromat -> Laundromats
+cafe -> Café
+thrift_store -> Op shops
+shopping_center -> Mall
+preschool,day_care_preschool -> Early childhood education
+elementary_school -> Primary schools
+middle_school -> Intermediate/full primary schools
+high_school -> Secondary schools
+vocational_and_technical_school -> Training institutions (non-degree)
+college_university -> Training institutions (degree)
+Sites of employment
+health_and_medical,family_practice -> GPs/M?ori primary care
+pharmacy -> Pharmacies
+emergency_room -> A&E
+Well Child services
+Midwives
+hospital -> Hospitals
+dentist,general_dentistry -> Oral healthcare services
+Mobile ear clinics
+mosque,religious_organization,church_cathedral,catholic_church,baptist_church,anglican_church,pentecostal_church,evangelical_church -> Religious institutions/places of worship
+community_center -> Community centres/halls
+Community Houses
+social_service_organizations -> CABs & other social services
+Work & Income offices
+Pokies
+betting_center -> TAB
+liquor_store -> Licensed premises/alcohol outlets
+fast_food_restaurant -> Fast food outlets
+Takeaways
+Te Reo street names
+Marae
+Kōhanga reo
+Kura
